@@ -1,10 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useFilter } from "../context/FilterProvider";
-import SearchDoctorInput from "./ui/SearchDoctorInput";
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useFilter } from '../context/FilterProvider';
+import SearchDoctorInput from './ui/SearchDoctorInput';
 
 const Navbar = () => {
   const { setFilters } = useFilter();
+
+  const params = useParams();
+
+  const isNewDoctorPage = params['*'] === 'doctors/new';
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
@@ -15,7 +19,7 @@ const Navbar = () => {
             alt="Bdoctors Logo"
             className="d-inline-block align-text-top me-2
             img-fluid"
-            style={{ maxHeight: "50px" }}
+            style={{ maxHeight: '50px' }}
           />
         </Link>
         <button
@@ -42,7 +46,7 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <div className="d-flex">
+          <div className={`d-flex  ${isNewDoctorPage && 'd-none'}`}>
             <SearchDoctorInput className="me-2" />
             <button className="btn btn-outline-primary">Cerca</button>
           </div>
